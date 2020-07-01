@@ -10,7 +10,7 @@ const StyledButton = styled(Button)`
   text-transform: none;
 `;
 
-const SignOutButton = ({ firebase }) => (
+const SignOutButton = ({ firebase }: any) => (
   <StyledButton type="button" onClick={firebase.doSignOut}>
       Sign Out
     <ExitToApp />

@@ -2,7 +2,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import uuidv4 from 'uuid/v4';
 import KanbanCard from './KanbanCard';
 import kanbanApi from '../../api/kanbanApi';
 
@@ -10,11 +9,11 @@ const StyledKanbanList = styled.div`
   background-color: '#DCDCDC';
 `;
 
-const KanbanList = ({kanbanList, leftKanbanList, rightKanbanList}) => {
-	const [newTitle, setNewTitle] = useState('')
-	const [newText, setNewText] = useState('')
+const KanbanList = ({kanbanList, leftKanbanList, rightKanbanList}: any) => {
+	const [newTitle, setNewTitle] = useState<any>('');
+	const [newText, setNewText] = useState<any>('');
 
-    const cardsJsx = kanbanList.cards.map(({title, id, text}) => (
+    const cardsJsx = kanbanList.cards.map(({title, id, text}: any) => (
 			<KanbanCard
 					id={id}
 					key={id}
@@ -26,14 +25,14 @@ const KanbanList = ({kanbanList, leftKanbanList, rightKanbanList}) => {
 			/>
 		));
     const handleClick = () => {
-			const newCard = {id: uuidv4(), title: newTitle, text: newText}
+			const newCard = {id: 1, title: newTitle, text: newText}
 			const newCards = [...kanbanList.cards, newCard]
 			kanbanList.setCards(newCards)
 			kanbanApi.saveCards(kanbanList.name, newCards)
 			setNewTitle('')
 			setNewText('')
 	}
-    const handleChange = event => {
+    const handleChange = (event: any) => {
         setNewTitle(event.target.value)
     }
     return (

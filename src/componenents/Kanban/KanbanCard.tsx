@@ -18,16 +18,16 @@ const StyledCard = styled(Card) `
     margin-bottom: 10px;
 `;
 
-const KanbanCard = ({id, title, text, kanbanList, leftKanbanList, rightKanbanList}) => {
+const KanbanCard = ({id, title, text, kanbanList, leftKanbanList, rightKanbanList}: any) => {
     const moveLeft = () => {
-        const existingCard = kanbanList.cards.find(card => card.id === id)
-        const newCards = kanbanList.cards.filter(card => card.id !== id)
+        const existingCard = kanbanList.cards.find((card: { id: any; }) => card.id === id)
+        const newCards = kanbanList.cards.filter((card: { id: any; }) => card.id !== id)
         kanbanList.setCards(newCards)
         leftKanbanList.setCards([...leftKanbanList.cards, existingCard])
     }
     const moveRight = () => {
-        const existingCard = kanbanList.cards.find(card => card.id === id)
-        const newCards = kanbanList.cards.filter(card => card.id !== id)
+        const existingCard = kanbanList.cards.find((card: { id: any; }) => card.id === id)
+        const newCards = kanbanList.cards.filter((card: { id: any; }) => card.id !== id)
         kanbanList.setCards(newCards)
         rightKanbanList.setCards([...rightKanbanList.cards, existingCard])
     }

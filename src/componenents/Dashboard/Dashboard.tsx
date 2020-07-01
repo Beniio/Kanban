@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Paper,Grid} from '@material-ui/core';
-import uuidv4 from 'uuid/v4';
 import KanbanList from '../Kanban/KanbanList';
 import kanbanApi from '../../api/kanbanApi';
 import { AuthUserContext } from '../Session';
-import { withAuthorization } from '../Session';
 
 const StyledPaper = styled(Paper)`
   margin-top: 40px;
@@ -16,26 +14,26 @@ const StyledPaper = styled(Paper)`
 
 const Dashboard = () => {
  
-  const loadCards = (name) => {
+  const loadCards = (name: string) => {
     const defaultCards = [
-        {id: uuidv4(), title: 'test', text: 'test'},
-        {id: uuidv4(), title: 'test2', text: 'test2.'}
+        {id: 1, title: 'test', text: 'test'},
+        {id: 2, title: 'test2', text: 'test2.'}
     ]
 
     const json = localStorage.getItem(name) || JSON.stringify({cards: defaultCards})
     return JSON.parse(json).cards
 }
 
-const useCards = listName => {
+const useCards = (listName: any) => {
     const [cards, setCardsPlain] = useState(loadCards(listName))
-    const setCards = newCards => {
+    const setCards = (newCards: any) => {
         setCardsPlain(newCards)
         kanbanApi.saveCards(listName, newCards)
     }
     return [cards, setCards]
 }
 
-const useKanbanList = (name, titleBackgroundColor) => {
+const useKanbanList = (name: any, titleBackgroundColor: any) => {
     const [cards, setCards] = useCards(name)
 
     return {
@@ -72,5 +70,4 @@ const kanbanListsJsx = kanbanLists.map((kanbanList, i) => (
     </StyledPaper>
   );
 };
-const authCondition = authUser => !!authUser;
-export default withAuthorization(authCondition)(Dashboard);
+export default (Dashboard);
